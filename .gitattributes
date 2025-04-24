@@ -1,0 +1,6 @@
+*.sql linguist-detectable=true
+*.sql linguist-language=SQL
+*.smk linguist-detectable=true
+*.smk linguist-language=Snakemake
+Snakefile linguist-detectable=true
+Snakefile linguist-language=Snakemake

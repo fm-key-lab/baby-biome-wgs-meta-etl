@@ -1,0 +1,14 @@
+name: 'baby_biome_data_infra'
+version: '1.0.0'
+profile: 'baby_biome_data_infra'
+
+model-paths: ["models"]
+analysis-paths: ["analyses"]
+test-paths: ["tests"]
+seed-paths: ["seeds"]
+macro-paths: ["macros"]
+snapshot-paths: ["snapshots"]
+
+clean-targets:
+  - "target"
+  - "dbt_packages"

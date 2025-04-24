@@ -1,0 +1,72 @@
+wgs:
+  samplesheets:
+    - name: ZusammenfassungMaldiB001_alleZeitpunkte
+      path: nextcloud:keylab/projects/2020_infantMbiome/Familien/Baby001/ZusammenfassungMaldiB001_alleZeitpunkte.xlsx
+      sheets:
+        - Library2mit9M+12M
+    - name: 2022_12_12allPrepFORLibrary
+      path: nextcloud:keylab/projects/2020_infantMbiome/Familien/Baby001/Library_Prep/2023_01_B001_Plate1to8/2022_12_12allPrepFORLibrary.xlsx
+      sheets:
+        - LibraryPlate1-3
+        - LibraryPlate4-8
+    - name: 20230912_B002_pooled_samples
+      path: nextcloud:keylab/projects/2020_infantMbiome/Familien/Baby002/Library_prep/Pooling/20230912_B002_pooled_samples.xlsx
+      sheets:
+        - Sheet1
+    - name: 2024_11_07_Library_prep_plates11to37_ENDE
+      path: nextcloud:keylab/projects/2020_infantMbiome/labbook/Analyse_Ecoli/LibraryPrep/Library_Ecoli_Nr1/2024_11_07_Library_prep_plates11to37_ENDE.xlsx
+      sheets:
+        - 2024_09_19_Library_prep_plates1
+    - name: 2024_11_15_allStrainsLibrary2
+      path: nextcloud:keylab/projects/2020_infantMbiome/labbook/Analyse_Ecoli/LibraryPrep/Library_Ecoli_Nr2/2024_11_15_allStrainsLibrary2.xlsx
+      sheets:
+        - 12M
+    - name: 2025_01_10_Library_prep_plates24to36and38to39_setup3
+      path: nextcloud:keylab/projects/2020_infantMbiome/labbook/Analyse_Ecoli/LibraryPrep/Library_Ecoli_Nr2/2025_01_10_Library_prep_plates24to36and38to39_setup3.xlsx
+      sheets:
+        - 2024_11_18_Library_prep_plates2
+    - name: allStrainsFrozenEcoli2RUN
+      path: nextcloud:keylab/projects/2020_infantMbiome/labbook/Analyse_Ecoli/B018_B019_B020_B024_B026_B027_B030_B031_B033_B034_B035/allStrainsFrozenEcoli2RUN.xlsx
+      sheets:
+        - Baby3M_6M_9M
+        - B018
+        - B019
+        - B020
+        - B024
+        - B026
+        - B027
+        - B030
+        - B031
+        - B033
+        - B034
+        - B035
+    - name: B002_Isolates_with_allfaecalisCHECKmeike_MF
+      path: nextcloud:keylab/projects/2020_infantMbiome/Familien/Baby002/Library_prep/B002_Isolates_with_allfaecalisCHECKmeike_MF.xlsx
+      sheets:
+        - Meike
+  runs:
+    - name: 20250228_AV234501_B-PE75-Ad-H
+      fastqs_dir: /ptmp/thosi/datasets/20250228_AV234501_250228-086-B-PE75-FS-HO/data
+      fastqs: /ptmp/thosi/datasets/20250228_AV234501_250228-086-B-PE75-FS-HO/weblinks.fJiFWd1lODrgby9D4rgNGi93.txt
+      log: nextcloud:keylab/sequencing_records/sequencing_run_logs/250128_InfantMbiome_Ecoli_Pool24to39andcontTB_Lib_AVITI/250123_sequencing_run_log_Ecoli_P24toP36_P38_P39_AVITII.csv
+      report: https://comanche.molgen.mpg.de/Stats_Aviti/20250228_AV234501_250228-086-B-PE75-FS-HO.v2.report.html
+    - name: 20241105_AV234501_B-PE75-Ad-H
+      fastqs_dir: /ptmp/thosi/datasets/20241105_AV234501_B-PE75-Ad-HiO/data
+      fastqs: /nexus/posix0/MPIIB-keylab/lab_data/raw_sequencing_data/20241105_AV234501_B-PE75-Ad-HiO/weblinks.BsoTZeB0lSnW57nVRfOM9V4a.txt
+      log: nextcloud:keylab/sequencing_records/sequencing_run_logs/241023_InfantMbiome_Ecoli_Pool14to23_Lib_AVITI/241023_sequencing_run_log_InfantMbiome_Ecoli_Pool14to23_Lib_AVITI_1.csv
+      report: https://comanche.molgen.mpg.de/Stats_Aviti/20241105_AV234501_B-PE75-Ad-HiO.NEW.report.html
+    - name: 230202_SN417_0449_B_HVV3FDRX2
+      fastqs_dir: /ptmp/thosi/datasets/230119_B001_Lib/data
+      fastqs: /nexus/posix0/MPIIB-keylab/lab_data/raw_sequencing_data/230119_B001_Lib/2023_02_05_L28414-1_KeyLabPool_Download_Links.txt
+      log: nextcloud:keylab/sequencing_records/sequencing_run_logs/230119_B001_Lib/2023_01_19_sequencing_run_log_B001_P1toP8.csv
+      report: ~
+    - name: 230922_SN417_0496_A_HJFVCDRX3
+      fastqs_dir: /ptmp/thosi/datasets/230913_B002_B001_Lib/data
+      fastqs: /nexus/posix0/MPIIB-keylab/lab_data/raw_sequencing_data/230913_B002_B001_Lib/2023_09_25_L29647-1_Poolall_Download_links.txt
+      log: nextcloud:keylab/sequencing_records/sequencing_run_logs/230913_B002_B001_Lib/230913_sequencing_run_log_B001_B002_Plate1to10.csv
+      report: ~
+    - name: 240703_AV234501_B-PE75-Ad-H
+      fastqs_dir: /ptmp/thosi/datasets/240704_B002_B001_Lib_AVITI_reseq/data
+      fastqs: /nexus/posix0/MPIIB-keylab/lab_data/raw_sequencing_data/240704_B002_B001_Lib_AVITI_reseq/2024_07_04_B002_B001_AVITI_reseq_Download_links.txt
+      log: nextcloud:keylab/sequencing_records/sequencing_run_logs/240704_B002_B001_Lib_AVITI_reseq/240704_sequencing_run_log_B001_B002_Plate1to10_AVITI_reseq.csv
+      report: ~

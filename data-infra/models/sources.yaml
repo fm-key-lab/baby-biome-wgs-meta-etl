@@ -1,0 +1,62 @@
+version: 2
+sources:
+  - name: fastqs
+    tables:
+      - name: weblinks
+        config:
+          external_location: "'meta/*/fastqs.txt'"
+  - name: run_info
+    tables:
+      - name: parsed
+        config:
+          external_location: "'meta/*/info.csv'"
+  - name: runlogs
+    tables:
+      - name: 230202_SN417_0449_B_HVV3FDRX2
+        config:
+          external_location: "meta/230202_SN417_0449_B_HVV3FDRX2/log.csv"
+      - name: 230922_SN417_0496_A_HJFVCDRX3
+        config:
+          external_location: "meta/230922_SN417_0496_A_HJFVCDRX3/log.csv"
+      - name: 240703_AV234501_B-PE75-Ad-H
+        config:
+          external_location: "meta/240703_AV234501_B-PE75-Ad-H/log.csv"
+      - name: 20241105_AV234501_B-PE75-Ad-H
+        config:
+          external_location: "meta/20241105_AV234501_B-PE75-Ad-H/log.csv"
+      - name: 20250228_AV234501_B-PE75-Ad-H
+        config:
+          external_location: "meta/20250228_AV234501_B-PE75-Ad-H/log.csv"
+  - name: samplesheets
+    tables:
+      - name: Baby3M_6M_9M
+        config:
+          external_location: "meta/samplesheets/allStrainsFrozenEcoli2RUN.Baby3M_6M_9M.csv"
+      - name: Library2mit9M+12M
+        config:
+          external_location: "meta/samplesheets/ZusammenfassungMaldiB001_alleZeitpunkte.Library2mit9M+12M.csv"
+      - name: B018_B019_B020_B024_B026_B027_B030_B031_B033_B034_B035
+        config:
+          external_location: "'meta/samplesheets/allStrainsFrozenEcoli2RUN.B0*.csv'"
+      - name: 12M
+        config:
+          external_location: "meta/samplesheets/2024_11_15_allStrainsLibrary2.12M.csv"
+      - name: 2024_09_19_Library_prep_plates1
+        config:
+          external_location: "meta/samplesheets/2024_11_07_Library_prep_plates11to37_ENDE.2024_09_19_Library_prep_plates1.csv"
+      - name: 2024_11_18_Library_prep_plates2
+        config:
+          external_location: "meta/samplesheets/2025_01_10_Library_prep_plates24to36and38to39_setup3.2024_11_18_Library_prep_plates2.csv"
+      - name: Meike
+        config:
+          external_location: "meta/samplesheets/B002_Isolates_with_allfaecalisCHECKmeike_MF.Meike.csv"
+      - name: LibraryPlate1-3
+        config:
+          external_location: "meta/samplesheets/2022_12_12allPrepFORLibrary.LibraryPlate1-3.csv"
+      - name: LibraryPlate4-8
+        config:
+          external_location: "meta/samplesheets/2022_12_12allPrepFORLibrary.LibraryPlate4-8.csv"
+      - name: Sheet1
+        config:
+          external_location: "meta/samplesheets/20230912_B002_pooled_samples.Sheet1.csv"
+  

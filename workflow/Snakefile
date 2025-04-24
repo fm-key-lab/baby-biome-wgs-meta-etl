@@ -1,0 +1,135 @@
+"""Whole-genome sequencing ETL workflow.
+
+Data infra pipeline for WGS data supporting the baby biome project.
+
+Usage example:
+
+  # Update to reflect new data or new (data) models
+  snakemake update_meta
+
+  # Create "main" samplesheet file for downstream analyses
+  snakemake make_samplesheet
+"""
+from snakemake.utils import min_version, validate
+
+min_version('8.24')
+
+validate(config, workflow.source_path('data.schema.yaml'))
+
+
+include: 'utils.smk'
+
+
+rule all:
+    input: WGS_SAMPLESHEET
+
+
+rule nextcloud_get:
+    """Base rule to fetch resources from Nextcloud."""
+    output: '<dest>'
+    params: 'nextcloud:<src>'
+    log: 'logs/<log>'
+    # conda: 'envs/rclone.yml'
+    container: 'docker://rclone/rclone:latest'
+    envmodules: 'rclone/1.67.0'
+    shell: 'rclone copyto --log-file={log} "{params}" {output}'
+
+
+use rule nextcloud_get as get_log with:
+    output: RUN_LOG
+    params: lambda wc: lookup_wgs_run('/log', wc.run_name)
+    log: 'logs/{run_name}.get_log.log'
+    localrule: True
+
+
+use rule nextcloud_get as get_samplesheet with:
+    output: SAMPLESHEET
+    params: lambda wc: lookup_wgs_samplesheet('/path', wc.samplesheet)
+    log: 'logs/{samplesheet}.get_samplesheet.log'
+    localrule: True
+
+
+rule get_samplesheet_sheets:
+    input: ancient(SAMPLESHEET)
+    output: SAMPLESHEET_SHEET
+    localrule: True
+    # conda: 'envs/csvkit.yml'
+    container: 'docker://ghcr.io/wireservice/csvkit:latest'
+    envmodules: 'csvkit/2.0.1'
+    shell: 'in2csv -f xlsx --sheet "{wildcards.sheet}" {input} 2>&1 | grep -iv "warn" > {output}'
+
+
+rule get_info:
+    input: ancient(RUN_LOG)
+    output: RUN_INFO
+    localrule: True
+    # conda: 'envs/csvkit.yml'
+    container: 'docker://ghcr.io/wireservice/csvkit:latest'
+    envmodules: 'csvkit/2.0.1'
+    script: 'scripts/parse_run_info.sh'
+
+
+rule get_fastqs:
+    output: FASTQS
+    params: lambda wc: lookup_wgs_run('/fastqs', wc.run_name)
+    localrule: True
+    shell: 'cp {params} {output}'
+
+
+rule render_dbt_profile:
+    """Renders a profiles.yml with correct db path(s).
+
+    dbt checks current working directory first for a profile. Other places
+    can be figured via env variable or via `dbt run` CLI, but rendering
+    dynamically feels easiest.
+    """
+    input: workflow.source_path('profiles-template.yml')
+    output: DBT_PROFILE
+    params:
+        db=config['wgs_meta_db'],
+        threads=2 # Number of concurrent models
+    template_engine: 'yte'
+
+
+rule update_meta:
+    input:
+        DBT_PROFILE,
+        *ancient(collect_samplesheets()),
+        *ancient(collect_from_runs([FASTQS, RUN_INFO, RUN_LOG])),
+    output: update(config['wgs_meta_db']),
+    params: config['bb_data_infra']
+    log: 'logs/dbt.log'
+    localrule: True
+    # conda: 'envs/dbt-duckdb.yml'
+    container: 'docker://airbyte/destination-duckdb:latest'
+    envmodules: 'dbt/1.9.4'
+    shell:
+        '''
+        export DBT_LOG_PATH="$(dirname {log})" \
+               DBT_PROJECT_DIR="{params}" \
+               DBT_TARGET_PATH="$(pwd)" \
+        && dbt run --target wgs_meta --select models/wgs_meta
+        '''
+
+
+checkpoint make_samplesheet:
+    """Make WGS samplesheet(s) for downstream tools.
+
+    Creates a 'main' WGS_SAMPLESHEET and a directory of strata samplesheets
+    using partitioned writes. See model for details.
+    """
+    input: DBT_PROFILE, config['wgs_meta_db']
+    output: directory(WGS_INPUTS), WGS_SAMPLESHEET
+    params: config['bb_data_infra']
+    log: 'logs/dbt.log'
+    localrule: True
+    # conda: 'envs/dbt-duckdb.yml'
+    container: 'docker://airbyte/destination-duckdb:latest'
+    envmodules: 'dbt/1.9.4'
+    shell:
+        '''
+        export DBT_LOG_PATH="$(dirname {log})" \
+               DBT_PROJECT_DIR="{params}" \
+               DBT_TARGET_PATH="$(pwd)" \
+        && dbt run --target wgs_meta --select models/exports
+        '''

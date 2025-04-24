@@ -1,0 +1,46 @@
+$schema: "https://json-schema.org/draft/2020-12/schema"
+description: Data and metadata (WGS,...)
+properties:
+  wgs:
+    type: object
+    description: WGS metadata.
+    properties:
+      runs:
+        type: array
+        required:
+          - name
+          - fastqs
+          - fastqs_dir
+          - log
+        properties:
+          name:
+            type: string
+            description: Unique name for WGS run.
+          fastqs:
+            type: string
+            description: Weblinks URL from MPIMG SeqCore or path to local version.
+          fastqs_dir:
+            type: string
+            description: Location of FASTQs.
+          log:
+            type: string
+            description: Path to run log.
+          report:
+            type: string
+            description: Report URL from MPIMG SeqCore or path to local version.
+      samplesheets:
+        type: array
+        required:
+          - name
+          - path
+          - sheets
+        properties:
+          name:
+            type: string
+            description: Samplesheet file basename (without extensions).
+          path:
+            type: string
+            description: Path to run samplesheet.
+          sheets:
+            type: array
+            description: Excel sheets to parse from .xlsx file.

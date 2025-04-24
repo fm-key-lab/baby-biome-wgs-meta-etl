@@ -1,0 +1,45 @@
+# Temporary and binary files
+# --------------------------
+*~
+*.parallel
+*.py[cod]
+*.so
+*.cfg
+!.isort.cfg
+!setup.cfg
+*.orig
+*.log
+*.pot
+__pycache__/*
+.cache/*
+.*.swp
+*/.ipynb_checkpoints/*
+.DS_Store
+
+# Workflow output
+# ---------------
+results/*
+report/*
+!report/*.pdf
+!report/*.tex
+
+# Log directories, caches
+# -----------------------
+logs/*
+dev
+dev-*
+archive
+archive-*
+data
+
+# Nextflow
+.nextflow
+.nextflow.log*
+work/*
+
+# Snakemake
+.snakemake
+
+# SLURM
+*.err
+*.out
