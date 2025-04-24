@@ -97,7 +97,7 @@ rule update_meta:
         *ancient(collect_samplesheets()),
         *ancient(collect_from_runs([FASTQS, RUN_INFO, RUN_LOG])),
     output: update(config['wgs_meta_db']),
-    params: config['bb_data_infra']
+    params: config['wgs_meta_dir']
     log: 'logs/dbt.log'
     localrule: True
     conda: 'envs/dbt-duckdb.yml'
@@ -120,7 +120,7 @@ checkpoint make_samplesheet:
     """
     input: DBT_PROFILE, config['wgs_meta_db']
     output: directory(WGS_INPUTS), WGS_SAMPLESHEET
-    params: config['bb_data_infra']
+    params: config['wgs_meta_dir']
     log: 'logs/dbt.log'
     localrule: True
     conda: 'envs/dbt-duckdb.yml'

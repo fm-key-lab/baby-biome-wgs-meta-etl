@@ -6,6 +6,7 @@ Clone the repo. Then, from either Raven or Viper clusters:
 
 ```bash
 module load snakemake
-cd <path/to>/baby-biome-wgs-meta-etl
-snakemake --config wgs_meta_db=/ptmp/thosi/test-work-dir/wgs/meta/test.duckdb
+THIS_PROJ=<path/to>/baby-biome-wgs-meta-etl
+cd $THIS_PROJ
+snakemake --config wgs_meta_db=<path/to>/wgs-meta.duckdb wgs_meta_dir=$THIS_PROJ/data-infra
 ```
