@@ -29,7 +29,7 @@ rule nextcloud_get:
     output: '<dest>'
     params: 'nextcloud:<src>'
     log: 'logs/<log>'
-    # conda: 'envs/rclone.yml'
+    conda: 'envs/rclone.yml'
     container: 'docker://rclone/rclone:latest'
     envmodules: 'rclone/1.67.0'
     shell: 'rclone copyto --log-file={log} "{params}" {output}'
@@ -53,7 +53,7 @@ rule get_samplesheet_sheets:
     input: ancient(SAMPLESHEET)
     output: SAMPLESHEET_SHEET
     localrule: True
-    # conda: 'envs/csvkit.yml'
+    conda: 'envs/csvkit.yml'
     container: 'docker://ghcr.io/wireservice/csvkit:latest'
     envmodules: 'csvkit/2.0.1'
     shell: 'in2csv -f xlsx --sheet "{wildcards.sheet}" {input} 2>&1 | grep -iv "warn" > {output}'
@@ -63,7 +63,7 @@ rule get_info:
     input: ancient(RUN_LOG)
     output: RUN_INFO
     localrule: True
-    # conda: 'envs/csvkit.yml'
+    conda: 'envs/csvkit.yml'
     container: 'docker://ghcr.io/wireservice/csvkit:latest'
     envmodules: 'csvkit/2.0.1'
     script: 'scripts/parse_run_info.sh'
@@ -100,7 +100,7 @@ rule update_meta:
     params: config['bb_data_infra']
     log: 'logs/dbt.log'
     localrule: True
-    # conda: 'envs/dbt-duckdb.yml'
+    conda: 'envs/dbt-duckdb.yml'
     container: 'docker://airbyte/destination-duckdb:latest'
     envmodules: 'dbt/1.9.4'
     shell:
@@ -123,7 +123,7 @@ checkpoint make_samplesheet:
     params: config['bb_data_infra']
     log: 'logs/dbt.log'
     localrule: True
-    # conda: 'envs/dbt-duckdb.yml'
+    conda: 'envs/dbt-duckdb.yml'
     container: 'docker://airbyte/destination-duckdb:latest'
     envmodules: 'dbt/1.9.4'
     shell:
