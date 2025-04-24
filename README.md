@@ -10,3 +10,5 @@ THIS_PROJ=<path/to>/baby-biome-wgs-meta-etl
 cd $THIS_PROJ
 snakemake --config wgs_meta_db=<path/to>/wgs-meta.duckdb wgs_meta_dir=$THIS_PROJ/data-infra
 ```
+
+Many choices in the Snakefile are made to enable this workflow to be used as a module within other Snakemake pipelines (e.g., extensive use of `workflow.source_path` and not using `workflow.basedir` in the `dbt` rules)

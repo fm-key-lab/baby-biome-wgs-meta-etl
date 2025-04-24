@@ -14,6 +14,8 @@ from snakemake.utils import min_version, validate
 
 min_version('8.24')
 
+configfile: workflow.source_path('../config/wgs-data.yml')
+
 validate(config, workflow.source_path('data.schema.yaml'))
 
 
