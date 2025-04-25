@@ -68,7 +68,7 @@ rule get_info:
     conda: 'envs/csvkit.yml'
     container: 'docker://ghcr.io/wireservice/csvkit:latest'
     envmodules: 'csvkit/2.0.1'
-    script: 'scripts/parse_run_info.sh'
+    script: 'parse_run_info.sh'
 
 
 rule get_fastqs:
